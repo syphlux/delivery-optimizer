@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
 from app.db.postgres import get_db
@@ -16,12 +17,12 @@ class OrderCreate(BaseModel):
     item_id: str
 
     pickup_address: str
-    pickup_lat: float
-    pickup_lon: float
+    pickup_lat: Optional[float] = None
+    pickup_lon: Optional[float] = None
 
     delivery_address: str
-    delivery_lat: float
-    delivery_lon: float
+    delivery_lat: Optional[float] = None
+    delivery_lon: Optional[float] = None
 
 
 class OrderRead(BaseModel):
