@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
+from sqlalchemy import Column, Integer, String, Float, DateTime, Enum, UUID
 from datetime import datetime, timezone
 from enum import Enum as PyEnum
 from app.db.postgres import Base
@@ -15,7 +15,7 @@ class OrderStatus(PyEnum):
 class Order(Base):
     __tablename__ = "orders"
 
-    id = Column(String, primary_key=True, index=True, default=lambda: str(uuid.uuid4()))
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     customer_name = Column(String, nullable=False)
     item_id = Column(String, nullable=False)
     pickup_address = Column(String, nullable=False)

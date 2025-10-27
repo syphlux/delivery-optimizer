@@ -4,9 +4,10 @@ from app.db.postgres import get_db
 from app.orders.models import Order, OrderStatus
 from pydantic import BaseModel
 from typing import List
+from uuid import UUID
 
 
-router = APIRouter(prefix="/orders", tags=["orders"])
+router = APIRouter(prefix="/orders", tags=["Orders"])
 
 
 # ---------- Pydantic Schemas ---------- #
@@ -24,7 +25,7 @@ class OrderCreate(BaseModel):
 
 
 class OrderRead(BaseModel):
-    id: str
+    id: UUID
     customer_name: str
     item_id: str
     pickup_address: str
