@@ -1,9 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.orders.routes import router as orders_router
 from app.drivers.routes import router as drivers_router
 from app.integrations.routes import router as integrations_router
 
 app = FastAPI(title="Delivery Optimizer", debug=True)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def read_root():

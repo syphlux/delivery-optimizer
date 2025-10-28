@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
@@ -24,6 +25,9 @@ class OrderCreate(BaseModel):
     delivery_lat: Optional[float] = None
     delivery_lon: Optional[float] = None
 
+    available_from: Optional[str] = None  # ISO format datetime string
+    deadline: Optional[str] = None  # ISO format datetime string
+
 
 class OrderRead(BaseModel):
     id: UUID
@@ -31,10 +35,15 @@ class OrderRead(BaseModel):
     item_id: str
     pickup_address: str
     delivery_address: str
+    available_from: datetime
+    deadline: datetime
     status: str
 
     class Config:
         orm_mode = True
+        json_encoders = {
+            datetime: lambda v: v.strftime("%Y/%m/%d %H:%M") if v else None
+        }
 
 
 class OrderStatusUpdate(BaseModel):

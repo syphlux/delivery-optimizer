@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orders | Delivery Optimizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#EDF2F1] text-[#04323B] min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#04323B] text-[#EDF2F1] p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-xl font-semibold">Delivery Optimizer</h1>
+    <button id="newOrderBtn" class="bg-[#EE5D11] hover:bg-[#EED811] hover:text-[#04323B] text-white px-4 py-2 rounded-md transition">
+      + New Order
+    </button>
+  </header>
+
+  <!-- Table Section -->
+  <main class="flex-1 p-6">
+    <h2 class="text-lg font-semibold mb-4">Orders</h2>
+    <div class="overflow-x-auto bg-white rounded-xl shadow">
+      <table class="min-w-full border-collapse table-fixed">
+        <colgroup>
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+        </colgroup>
+        <thead class="bg-[#D8E4E0] text-[#04323B]">
+          <tr>
+            <th class="py-2 px-4 text-left truncate max-w-[120px]">Order ID</th>
+            <th class="py-2 px-4 text-left">Item ID</th>
+            <th class="py-2 px-4 text-left">Customer Name</th>
+            <th class="py-2 px-4 text-left">Pickup location</th>
+            <th class="py-2 px-4 text-left">Delivery location</th>
+            <th class="py-2 px-4 text-left cursor-pointer group" id="sortAvailableFrom">Available From <span class="inline-block group-hover:text-[#EE5D11]">&#8597;</span></th>
+            <th class="py-2 px-4 text-left cursor-pointer group" id="sortDeadline">Deadline <span class="inline-block group-hover:text-[#EE5D11]">&#8597;</span></th>
+            <th class="py-2 px-4 text-left cursor-pointer group" id="sortStatus">Status <span class="inline-block group-hover:text-[#EE5D11]">&#8597;</span></th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="orderModal" class="fixed inset-0 bg-black bg-opacity-40 hidden">
+    <div class="absolute left-1/2 top-24 -translate-x-1/2 bg-white rounded-xl p-6 w-96 shadow-lg">
+      <h3 class="text-lg font-semibold mb-4">New Order</h3>
+      <form id="orderForm" class="flex flex-col gap-3">
+        <input type="text" name="item_id" placeholder="Item ID" class="border p-2 rounded" required />
+        <input type="text" name="customer_name" placeholder="Customer Name" class="border p-2 rounded" required />
+        <input type="text" name="pickup_address" placeholder="Pickup Address" class="border p-2 rounded" required />
+        <input type="text" name="delivery_address" placeholder="Delivery Address" class="border p-2 rounded" required />
+        <button type="submit" class="bg-[#EE5D11] text-white py-2 rounded hover:bg-[#EED811] transition">
+          Save
+        </button>
+      </form>
+      <button id="closeModal" class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+    </div>
+  </div>
+
+  <!-- External JS -->
+  <script src="js/orders.js"></script>
+</body>
+</html>
